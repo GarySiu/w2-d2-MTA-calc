@@ -9,30 +9,36 @@ window.onload = function() {
   startListeners();
   enumStepTargets();
 }
-var step = 0;
-function enumStepTargets() {
-  var step1 = document.getElementById('step1');
-  var step2 = document.getElementById('step2');
-  var step3 = document.getElementById('step3');
-  var step4 = document.getElementById('step4');
-}
-function setChoice() {
-  switch(step) {
-    case 0: step1.innerText = this.innerText;
-    step++;
-    break;
-    case 1: step2.innerText = this.innerText;
-    step++;
-    break;
+// var step = 0;
+// function enumStepTargets() {
+//   var step1 = document.getElementById('step1');
+//   var step2 = document.getElementById('step2');
+//   var step3 = document.getElementById('step3');
+//   var step4 = document.getElementById('step4');
+// }
+// function setChoice() {
+//   if (step === 0) {
+//     step1.innerText = this.innerText;
+//     step++;
+//     } else if (step === 1) {
+//     step2.innerText = this.innerText;
+//     step++;
+//     }
+
+    // Let's worry about potential return journeys later?
+
     // case 2: step3.innerText = this.innerText;
     // step++;
     // break;
     // case 3: step4.innerText = this.innerText;
     // step++;
     // break;
-  }
-}
-
+  // }
+// }
+// function showResult() {
+//   var choice1 = step1.index;
+//   var choice2 = step2.index;
+// }
 function startListeners() {
 //Stick listeners to all the stops on the nLine
 for (var i = 0; i < document.getElementsByClassName('nLineStops').length; i++) {
