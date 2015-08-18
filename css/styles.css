@@ -7,10 +7,10 @@ html {
 }
 /* Basic two column layout with a results box in the bottom */
 /* Throw a border around all the divs for diagnostics */
-div {
+/*div {
   border: 1px solid  #000;
 }
-div#stop_picker {
+*/div#stopPicker {
   display: inline-block;
   width: 30%;
   vertical-align: top;
@@ -25,10 +25,51 @@ div#choices {
 }
 div#results {
   width: 100%;
+  height: 60px;
   text-align: center;
+  font-size: 40px;
 }
 div.lineToggle {
   display: inline-block;
   width: 50px;
   height: 50px;
+  line-height: 50px;
+}
+.lineN {
+  background: #FEFD0A;
+}
+.lineL {
+  background: #B2B2B2;
+}
+.line6 {
+  background: #1DCB06;
+}
+.linemap {
+  font-size: 30px;
+}
+div#stopPicker ul {
+  padding: 0;
+  list-style-type: none;
+}
+/* Hide extra UI elements */
+#l_line {
+  display: none;
+}
+#six_line {
+  display: none;
+}
+/*#outboundStart {
+  display: none;
+}
+#outboundFinish {
+  display: none;
+}*/
+#returnStart{
+  display: none;
+} 
+#returnFinish {
+  display: none;
+}
+#results {
+  display: none;
 }
