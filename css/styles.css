@@ -1,11 +1,12 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
+  font-family: Helvetica;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
-/* Basic two column layout with a results box in the bottom */
+/* Basic two column layout */
 /* Throw a border around all the divs for diagnostics */
 div {
   border: 1px solid  #000;
@@ -19,7 +20,7 @@ div#stopPicker {
 div#choices {
   display: inline-block;
   width: 69%;
-  padding: 0 auto;
+  height: 100%;
   vertical-align: top;
   text-align: center;
 }
@@ -50,20 +51,4 @@ div.lineToggle {
 div#stopPicker ul {
   padding: 0;
   list-style-type: none;
-}
-/* Hide extra UI elements */
-/*#l_line {
-  display: none;
-}
-#six_line {
-  display: none;
-}*/
-#returnStart{
-  display: none;
-} 
-#returnFinish {
-  display: none;
-}
-#results {
-  display: none;
 }

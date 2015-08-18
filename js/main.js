@@ -7,41 +7,33 @@
 
 window.onload = function() {
   startListeners();
-  enumStepTargets();
 }
-// var step = 0;
-// function enumStepTargets() {
-//   var step1 = document.getElementById('step1');
-//   var step2 = document.getElementById('step2');
-//   var step3 = document.getElementById('step3');
-//   var step4 = document.getElementById('step4');
-// }
-// function setChoice() {
-//   if (step === 0) {
-//     step1.innerText = this.innerText;
-//     step++;
-//     } else if (step === 1) {
-//     step2.innerText = this.innerText;
-//     step++;
-//     }
-
-    // Let's worry about potential return journeys later?
-
-    // case 2: step3.innerText = this.innerText;
-    // step++;
-    // break;
-    // case 3: step4.innerText = this.innerText;
-    // step++;
-    // break;
-  // }
-// }
-// function showResult() {
-//   var choice1 = step1.index;
-//   var choice2 = step2.index;
-// }
+var choices = document.getElementById('choices');
+var nLine = document.getElementsByClassName('nLine');
+var lLine = document.getElementsByClassName('lLine');
+var sixLine = document.getElementsByClassName('sixLine');
+//Convert nLine et al to REAL ARRAYS with prototype voodoo
+var nLineArr = Array.prototype.slice.call(nLine);
+var lLineArr = Array.prototype.slice.call(lLine);
+var sixLineArr = Array.prototype.slice.call(sixLine);
+var startLocation;
+var nextLocation;
+function addChoice() {
+  if(startLocation) {
+    nextLocation = this
+  } else {
+    startLocation = this;
+  }
+}
 function startListeners() {
-//Stick listeners to all the stops on the nLine
-for (var i = 0; i < document.getElementsByClassName('nLineStops').length; i++) {
-  document.getElementsByClassName('nLineStops')[i].addEventListener('click', setChoice)
+//Stick listeners to all the stops
+for (var i = 0; i < nLine.length; i++) {
+  nLine[i].addEventListener('click', addChoice)
+  }
+for (var i = 0; i < lLine.length; i++) {
+  lLine[i].addEventListener('click', addChoice)
+  }
+for (var i = 0; i < sixLine.length; i++) {
+  sixLine[i].addEventListener('click', addChoice)
   }
 }
