@@ -12,6 +12,8 @@ var lLineArr = Array.prototype.slice.call(lLine);
 var sixLineArr = Array.prototype.slice.call(sixLine);
 var startLocation;
 var nextLocation;
+var startIndex;
+var nextIndex;
 // End init
 function checkChoice() {
   if(startLocation) { //Have we gone anywhere yet? If we have, let's compare where were.
@@ -25,8 +27,11 @@ function checkChoice() {
     //Are we on the same line? Or are they at or going to Union Square (which is on all lines)
     if ((startLocation.attributes.class.value === nextLocation.attributes.class.value)||startLocation.attributes.innerText === "Union Square"||nextLocation.innerText === "Union Square") {
       console.log("You're on the same line");
+      startIndex = getIndex(startLocation.attributes.class.value, startLocation);
+      nextIndex = getIndex(this.attributes.class.value,this);
+      var stopsGone = getDifference(startIndex,nextIndex);
       var answerDiv = document.createElement("div");
-      answerDiv.innerText = this.innerText;
+      answerDiv.innerText = this.innerText +" +"+ stopsGone+" stops";
       answerDiv.className = setColor(this.attributes.class.value);
       choices.appendChild(answerDiv);
       startLocation = nextLocation;
@@ -54,9 +59,25 @@ function setColor(parentClass) {
   } else {
     return "line6";
   }
-
 }
-
+function getIndex(parentClass,searchValue) {
+  if(parentClass === "nLine") {
+    return nLineArr.indexOf(searchValue);
+  }
+  if(parentClass === "lLine") {
+    return lLineArr.indexOf(searchValue);
+  }
+  if(parentClass === "line6") {
+    return sixLineArr.indexOf(searchValue);
+  }
+}
+function getDifference(a,b) {
+  if (a > b) {
+    return a - b;
+  } else {
+    return b - a;
+  }
+}
 function startListeners() {
 //Stick listeners to all the stops
 for (var i = 0; i < nLine.length; i++) {
