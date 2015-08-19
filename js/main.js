@@ -18,20 +18,20 @@ function checkChoice() {
     nextLocation = this;
     //Is our user annoying enough to have clicked the same location twice? If so ignore it.
     if (startLocation === nextLocation || (startLocation.innerText === "Union Square" && nextLocation.innerText === "Union Square")) {
-      console.log("You're one stupid motherfucker");
+      console.log("You haven't gone any stops");
       startLocation = nextLocation;
       return;
     }
-    //Are we on the same line? Or are they at Union Street (which is on all lines)
-    if (startLocation.attributes.class.value === nextLocation.attributes.class.value) {
-      console.log("You have good taste");
+    //Are we on the same line? Or are they at or going to Union Square (which is on all lines)
+    if ((startLocation.attributes.class.value === nextLocation.attributes.class.value)||startLocation.attributes.innerText === "Union Square"||nextLocation.innerText === "Union Square") {
+      console.log("You're on the same line");
       var answerDiv = document.createElement("div");
       answerDiv.innerText = this.innerText;
       answerDiv.className = setColor(this.attributes.class.value);
       choices.appendChild(answerDiv);
       startLocation = nextLocation;
     } else {
-      console.log("You're more difficult");
+      console.log("You're on a different line");
       var answerDiv = document.createElement("div");
       answerDiv.innerText = this.innerText;
       answerDiv.className = setColor(this.attributes.class.value);
