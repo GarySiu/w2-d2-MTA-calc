@@ -29,6 +29,12 @@ function checkChoice() {
       console.log("You're on the same line");
       startIndex = getIndex(startLocation.attributes.class.value, startLocation);
       nextIndex = getIndex(this.attributes.class.value,this);
+      // //Correcting for if they are starting or ending on Union Square
+      // if (startLocation.innerText === "Union Square") {
+      //   startIndex = getThisUnion(startLocation.attributes.class.value);
+      // } else if(nextLocation.innerText === "Union Square") {
+      //   nextIndex === getThisUnion(this.attributes.class.value);
+      // }
       var stopsGone = getDifference(startIndex,nextIndex);
       var answerDiv = document.createElement("div");
       answerDiv.innerText = this.innerText +" +"+ stopsGone+" stops";
@@ -69,6 +75,17 @@ function getIndex(parentClass,searchValue) {
   }
   if(parentClass === "line6") {
     return sixLineArr.indexOf(searchValue);
+  }
+}
+function getThisUnion(parentClass) {
+  if(parentClass === "nLine") {
+    return 4;
+  }
+  if(parentClass === "lLine") {
+    return 2;
+  }
+  if(parentClass === "line6") {
+    return 4;
   }
 }
 function getDifference(a,b) {
