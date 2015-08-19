@@ -1,13 +1,7 @@
-// OLD IDEA. Do not use. Also you can't name your variables starting with a number stupid!
-//
-// //Store the stations in an array for each line
-// var n_line = ["Times Square", "34th", "28th", "23rd", "Union Square", "8th"];
-// var l_line = ["8th","6th","Union Square","3rd","1st"]
-// var 6_line = ["Grand Central","33rd","28th","23rd","Union Square","Astor Place"]
-
 window.onload = function() {
   startListeners();
 }
+// Begin init
 var choices = document.getElementById('choices');
 var nLine = document.getElementsByClassName('nLine');
 var lLine = document.getElementsByClassName('lLine');
@@ -18,22 +12,60 @@ var lLineArr = Array.prototype.slice.call(lLine);
 var sixLineArr = Array.prototype.slice.call(sixLine);
 var startLocation;
 var nextLocation;
-function addChoice() {
-  if(startLocation) {
-    nextLocation = this
-  } else {
+// End init
+function checkChoice() {
+  if(startLocation) { //Have we gone anywhere yet? If we have, let's compare where were.
+    nextLocation = this;
+    //Is our user annoying enough to have clicked the same location twice? If so ignore it.
+    if (startLocation === nextLocation || (startLocation.innerText === "Union Square" && nextLocation.innerText === "Union Square")) {
+      console.log("You're one stupid motherfucker");
+      startLocation = nextLocation;
+      return;
+    }
+    //Are we on the same line? Or are they at Union Street (which is on all lines)
+    if (startLocation.attributes.class.value === nextLocation.attributes.class.value) {
+      console.log("You have good taste");
+      var answerDiv = document.createElement("div");
+      answerDiv.innerText = this.innerText;
+      answerDiv.className = setColor(this.attributes.class.value);
+      choices.appendChild(answerDiv);
+      startLocation = nextLocation;
+    } else {
+      console.log("You're more difficult");
+      var answerDiv = document.createElement("div");
+      answerDiv.innerText = this.innerText;
+      answerDiv.className = setColor(this.attributes.class.value);
+      choices.appendChild(answerDiv)
+      startLocation = nextLocation;
+    }
+  } else {//Haven't been anywhere? Then let's just set a start location.
     startLocation = this;
+    var answerDiv = document.createElement("div");
+    answerDiv.innerText = this.innerText;
+    answerDiv.className = setColor(this.attributes.class.value);
+    choices.appendChild(answerDiv);
   }
 }
+function setColor(parentClass) {
+  if(parentClass === "nLine") {
+    return "lineN";
+  } else if(parentClass === "lLine") {
+    return "lineL";
+  } else {
+    return "line6";
+  }
+
+}
+
 function startListeners() {
 //Stick listeners to all the stops
 for (var i = 0; i < nLine.length; i++) {
-  nLine[i].addEventListener('click', addChoice)
+  nLine[i].addEventListener('click', checkChoice)
   }
 for (var i = 0; i < lLine.length; i++) {
-  lLine[i].addEventListener('click', addChoice)
+  lLine[i].addEventListener('click', checkChoice)
   }
 for (var i = 0; i < sixLine.length; i++) {
-  sixLine[i].addEventListener('click', addChoice)
+  sixLine[i].addEventListener('click', checkChoice)
   }
 }
